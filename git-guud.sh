@@ -13,6 +13,16 @@ else
     trap "ssh-agent -k" exit
 fi
 
+if [ -d .git ]; then
+    echo "git repository already initialised"
+else
+    echo "git repository not initialised. Initiliasing now..."
+    git init
+    echo -n "Enter the name of the repository: "
+    read repository
+    git remote add origin "git@github.com:fabruun/${repository}"
+fi
+
 git add .
 echo -n "Enter a commit message: "
 read commitMessage
